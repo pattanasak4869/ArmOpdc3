@@ -29,4 +29,12 @@ class MyConstant {
       fontWeight: FontWeight.normal,
     );
   }
+
+  TextStyle customStyle(){
+    return TextStyle(
+      fontSize: 24,
+      color: dark,
+      fontWeight: FontWeight.w700,
+    );
+  }
 }
