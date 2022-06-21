@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:armopdc3/utility/my_constant.dart';
 import 'package:flutter/material.dart';
 
 class ShowForm extends StatelessWidget {
@@ -22,6 +23,8 @@ class ShowForm extends StatelessWidget {
       obscureText: obsecu ?? false,
       onChanged: changeFung,
       decoration: InputDecoration(
+        fillColor: Colors.white.withOpacity(0.5),
+        filled: true,
         suffixIcon: redEyeFunc == null
             ? Icon(iconData)
             : IconButton(
@@ -35,9 +38,11 @@ class ShowForm extends StatelessWidget {
           left: 16,
         ),
         enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: MyConstant.dark),
           borderRadius: BorderRadius.circular(15),
         ),
         focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: MyConstant.colbut),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
