@@ -4,6 +4,7 @@ import 'package:armopdc3/widgets/show_button.dart';
 import 'package:armopdc3/widgets/show_form.dart';
 import 'package:armopdc3/widgets/show_image.dart';
 import 'package:armopdc3/widgets/show_text.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class Authen extends StatefulWidget {
@@ -63,6 +64,7 @@ class _AuthenState extends State<Authen> {
             );
           } else {
             print('No space');
+            processCheckLogin();
           }
         },
       ),
@@ -132,5 +134,14 @@ class _AuthenState extends State<Authen> {
         ],
       ),
     );
+  }
+  
+  Future<void> processCheckLogin() async {
+    String path = 
+      'https://www.androidthai.in.th/egat/getUserWhereUser_armopdc3.php?isAdd=true&user=$user';
+    
+    await Dio().get(path).then((value){
+      print('value ==> $value');
+    });
   }
 }

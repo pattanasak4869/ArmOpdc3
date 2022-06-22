@@ -5,7 +5,7 @@ class MyConstant {
   static Color primary = Color.fromARGB(255, 144, 79, 170);
   static Color dark = const Color.fromARGB(255, 26, 26, 66);
   static Color colbut = Color.fromARGB(255, 127, 63, 152);
-
+  static Color active = Color.fromARGB(255, 66, 9, 99);
   //Method
 
   BoxDecoration bgBox() {
@@ -38,6 +38,14 @@ class MyConstant {
     return TextStyle(
       fontSize: 14,
       color: dark,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle h3ActiveStyle() {
+    return TextStyle(
+      fontSize: 14,
+      color: active,
       fontWeight: FontWeight.normal,
     );
   }

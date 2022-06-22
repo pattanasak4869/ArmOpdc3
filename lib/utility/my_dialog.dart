@@ -2,6 +2,7 @@
 import 'package:armopdc3/utility/my_constant.dart';
 import 'package:armopdc3/widgets/show_image.dart';
 import 'package:armopdc3/widgets/show_text.dart';
+import 'package:armopdc3/widgets/show_text_button.dart';
 import 'package:flutter/material.dart';
 
 class MyDialog {
@@ -19,7 +20,7 @@ class MyDialog {
       builder: (BuildContext context) => AlertDialog(
         title: ListTile(
           leading: SizedBox(
-            width: 80,
+            width: 120,
             child: ShowImage(),
           ),
           title: ShowText(
@@ -31,6 +32,9 @@ class MyDialog {
             textStyle: MyConstant().h3Style(),
           ),
         ),
+        actions: [ShowTextButton(label: 'OK', pressFunc: (){
+          Navigator.pop(context);
+        })],
       ),
     );
   }
