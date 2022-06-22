@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:armopdc3/models/user_model.dart';
+import 'package:armopdc3/states/my_service.dart';
 import 'package:armopdc3/utility/my_constant.dart';
 import 'package:armopdc3/utility/my_dialog.dart';
 import 'package:armopdc3/widgets/show_button.dart';
@@ -135,13 +139,40 @@ class _AuthenState extends State<Authen> {
       ),
     );
   }
-  
+
   Future<void> processCheckLogin() async {
-    String path = 
-      'https://www.androidthai.in.th/egat/getUserWhereUser_armopdc3.php?isAdd=true&user=$user';
-    
-    await Dio().get(path).then((value){
-      print('value ==> $value');
+    String path =
+        'https://www.androidthai.in.th/egat/getUserWhereUser_armopdc3.php?isAdd=true&user=$user';
+
+    await Dio().get(path).then((value) {
+      if (value.toString() == 'null') {
+        MyDialog(context: context).normalDialog(
+            title: 'User False!!!', subtitle: 'No $user in my database');
+      } else {
+        var result = json.decode(value.data);
+        print('result === $result');
+        for (var element in result) {
+          UserModel userModel = UserModel.fromMap(element);
+          if (password == userModel.password) {
+            MyDialog(context: context).normalDialog(
+              pressFunc: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyService(),
+                    ),
+                    (route) => false);
+              },
+              label: 'Go to Service',
+              title: 'Welcome to SEPMS',
+              subtitle: 'LOGIN SUCCESS!!!',
+            );
+          } else {
+            MyDialog(context: context).normalDialog(
+                title: 'Password False!!!', subtitle: 'Please Try gain!!!');
+          }
+        }
+      }
     });
   }
 }

@@ -5,7 +5,7 @@ class MyConstant {
   static Color primary = Color.fromARGB(255, 144, 79, 170);
   static Color dark = const Color.fromARGB(255, 26, 26, 66);
   static Color colbut = Color.fromARGB(255, 127, 63, 152);
-  static Color active = Color.fromARGB(255, 66, 9, 99);
+  static Color active = Color.fromARGB(255, 162, 0, 255);
   //Method
 
   BoxDecoration bgBox() {
@@ -46,7 +46,7 @@ class MyConstant {
     return TextStyle(
       fontSize: 14,
       color: active,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.bold,
     );
   }
 
@@ -54,7 +54,7 @@ class MyConstant {
     return  TextStyle(
         fontSize: 24,
         color: Color.fromRGBO(127, 63, 152, 1),
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.bold,
       );
     }
 }

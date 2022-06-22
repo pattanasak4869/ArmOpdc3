@@ -14,13 +14,15 @@ class MyDialog {
   Future<void> normalDialog({
     required String title,
     required String subtitle,
+    String? label,
+    Function()? pressFunc,
   }) async {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: ListTile(
           leading: SizedBox(
-            width: 120,
+            width: 80,
             child: ShowImage(),
           ),
           title: ShowText(
@@ -32,9 +34,13 @@ class MyDialog {
             textStyle: MyConstant().h3Style(),
           ),
         ),
-        actions: [ShowTextButton(label: 'OK', pressFunc: (){
-          Navigator.pop(context);
-        })],
+        actions: [
+          pressFunc == null ? ShowTextButton(
+              label: 'OK',
+              pressFunc: () {
+                Navigator.pop(context);
+              }) : ShowTextButton(label: label!, pressFunc: pressFunc),
+        ],
       ),
     );
   }
