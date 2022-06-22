@@ -10,6 +10,7 @@ import 'package:armopdc3/widgets/show_image.dart';
 import 'package:armopdc3/widgets/show_text.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Authen extends StatefulWidget {
   const Authen({Key? key}) : super(key: key);
@@ -155,16 +156,26 @@ class _AuthenState extends State<Authen> {
           UserModel userModel = UserModel.fromMap(element);
           if (password == userModel.password) {
             MyDialog(context: context).normalDialog(
-              pressFunc: () {
-                Navigator.pushAndRemoveUntil(
+              pressFunc: () async {
+                SharedPreferences preferences = 
+                  await SharedPreferences.getInstance();
+
+                var data = <String>[];
+                data. add(userModel.id);
+                data. add(userModel.name);
+                data. add(userModel.position);
+
+                preferences.setStringList('data', data).then((value){
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const MyService(),
                     ),
                     (route) => false);
+                });
               },
               label: 'Go to Service',
-              title: 'Welcome to SEPMS',
+              title: 'Welcome to SEPMS', 
               subtitle: 'LOGIN SUCCESS!!!',
             );
           } else {
