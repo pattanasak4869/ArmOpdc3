@@ -36,7 +36,14 @@ class MyConstant {
 
   TextStyle h3Style() {
     return TextStyle(
-      fontSize: 14,
+      fontSize: 12,
+      color: dark,
+      fontWeight: FontWeight.normal,
+    );
+  }
+  TextStyle h13Style() {
+    return TextStyle(
+      fontSize: 13,
       color: dark,
       fontWeight: FontWeight.normal,
     );

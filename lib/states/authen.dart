@@ -164,6 +164,7 @@ class _AuthenState extends State<Authen> {
                 data. add(userModel.id);
                 data. add(userModel.name);
                 data. add(userModel.position);
+                data. add(userModel.users);
 
                 preferences.setStringList('data', data).then((value){
                   Navigator.pushAndRemoveUntil(
