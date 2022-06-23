@@ -2,6 +2,7 @@ import 'package:armopdc3/bodys/non_finish_job.dart';
 import 'package:armopdc3/utility/my_constant.dart';
 import 'package:armopdc3/utility/my_dialog.dart';
 import 'package:armopdc3/widgets/show_icon_button.dart';
+import 'package:armopdc3/widgets/show_progress.dart';
 import 'package:armopdc3/widgets/show_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,17 +25,27 @@ class _MyServiceState extends State<MyService> {
     Icons.close,
     Icons.done,
   ];
-  var widgets = <Widget>[
-    const NonFinishJob(),
-    const FinishJob(),
-  ];
+  var widgets = <Widget>[];
   var bottonNavigators = <BottomNavigationBarItem>[];
   int indexBodys = 0;
 
   @override
   void initState() {
     super.initState();
+    createNavBar();
+    processFindUserLogin();
+  }
 
+  Future<void> processFindUserLogin() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var dataLogins = preferences.getStringList('data');
+    print('dataLogins == > $dataLogins');
+    widgets.add(NonFinishJob(dataUserLogins: dataLogins!));
+    widgets.add(FinishJob());
+    setState(() {});
+  }
+
+  void createNavBar() {
     for (var i = 0; i < titles.length; i++) {
       bottonNavigators.add(
         BottomNavigationBarItem(
@@ -52,7 +63,7 @@ class _MyServiceState extends State<MyService> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: newNavbar(context),
-      body: widgets[indexBodys],
+      body: widgets.isEmpty ? const ShowProgress() : widgets[indexBodys],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: indexBodys,
         items: bottonNavigators,
@@ -68,10 +79,8 @@ class _MyServiceState extends State<MyService> {
   AppBar newNavbar(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      title: ShowText(
-        text: titles[indexBodys],
-        textStyle: MyConstant().h2Style()
-      ),
+      title:
+          ShowText(text: titles[indexBodys], textStyle: MyConstant().h2Style()),
       elevation: 0,
       foregroundColor: MyConstant.dark,
       backgroundColor: Colors.white,

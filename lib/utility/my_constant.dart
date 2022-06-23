@@ -41,7 +41,20 @@ class MyConstant {
       fontWeight: FontWeight.normal,
     );
   }
-
+  TextStyle h16boldStyle() {
+    return TextStyle(
+      fontSize: 16,
+      color: dark,
+      fontWeight: FontWeight.bold,
+    );
+  }
+  TextStyle h16Style() {
+    return TextStyle(
+      fontSize: 16,
+      color: dark,
+      fontWeight: FontWeight.normal,
+    );
+  }
   TextStyle h3ActiveStyle() {
     return TextStyle(
       fontSize: 14,
